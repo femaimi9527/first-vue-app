@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>javaScript-slideshow-轮播图</title>
+    <style>
+        .active {
+            background-color: skyblue;
+        }
+
+        .slidebutton {
+            position: relative;
+        }
+
+        .indexes {
+            width: 100px;
+            height: 20px;
+            background-color: #000;
+            display: flex;
+            position: absolute;
+            /* 这里不要写0值，赋0值的话会贴到图片底部，不美观 */
+            bottom: 15px;
+            /* 居中的写法 */
+            left: calc(50% 50px);
+        }
+
+        .indexes li {
+            background-color: #fff;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin: 0 3px;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    DOM document object model 文档对象模型
+    <div id="slideshow">
+        <h1>Simba</h1>
+        <img id="slideshowImg" src="http://p1.music.126.net/6Ebiv9W15ipPcpnlmDmkKA==/109951164415299765.jpg" alt="">
+        <div class="slidebutton">
+            <ul class="indexes">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script>
+
+        var slideshow = document.getElementById('slideshow');
+
+        // 4-1、定义一个数组，存几张图片
+        let arr = [
+            "http://p1.music.126.net/6Ebiv9W15ipPcpnlmDmkKA==/109951164415299765.jpg",
+            "http://p1.music.126.net/-sDR7TAzdNva3JUZtf3iyg==/109951164415357260.jpg",
+            "http://p1.music.126.net/saEZCTfumfvGTVLaLzSw9w==/109951164415311739.jpg",
+            "http://p1.music.126.net/mFGqBD19zNW2D1yyOP0fnw==/109951164415341803.jpg"
+        ];
+        // slideshowImg.src = arr[2];
+
+        // 1、innerHTML和innerText的区别
+
+        // 1-1、打印html标签也能找到打印出来
+        console.log(slideshow.innerHTML);
+        // 1-2、只能打印纯字符
+        console.log(slideshow.innerText);
+
+        // 2、控制样式的属性style
+
+        // 2-1、第1种写法
+        // slideshow.style.color = 'red';
+        // 2-2、第2种写法
+        // slideshow.style['color'] = 'green';
+        // 2-3、加class,然后就能引用<style>标签里面的样式
+        // slideshow.classList.add("active");
+        // slideshowImg.src = "http://p1.music.126.net/-sDR7TAzdNva3JUZtf3iyg==/109951164415357260.jpg"
+
+        // 3-1、设置多久之后执行 setTimeout，单位毫秒，系统内置的方法
+        // setTimeout(() => {
+        //     // 执行删除图片动作
+        //     slideshowImg.remove();
+        // }, 2000);
+
+        // 3-2、设置每隔多久执行
+        // 4-3、把数组中的元素索引定义为变量
+        var index = 0;
+        setInterval(() => {
+            // 4-4、每次进来后自增一次
+            index++;
+            // 4-5、这个数组的元素有[0,1,2,3]，当index = 3 的时候，设置回index=0   
+            if (index === 4) {
+                index = 0;
+            }
+            // 这里也可以这么写：if(index===3) index =0;
+
+            // 4-2、切下标 
+            slideshowImg.src = arr[index];
+
+            // 每隔一秒打印1次当前日期
+            //  console.log(new Date());
+
+        }, 1500);
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

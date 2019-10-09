@@ -32,7 +32,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 2、学习原生JavaScript设计轮播图 slideshow；
 
-### 数组-在计算机科学中的定义：** 摘选自维基百科，地址：[数组的定义](https://zh.wikipedia.org/wiki/%E6%95%B0%E7%BB%84) **
+### 数组-在计算机科学中的定义： 摘选自维基百科，地址：[数组的定义](https://zh.wikipedia.org/wiki/%E6%95%B0%E7%BB%84) 
 
 在计算机科学中，数组数据结构（英语：array data structure），简称数组（英语：Array），是由相同类型的元素（element）的集合所组成的数据结构，分配一块连续的内存来存储。利用元素的索引（index）可以计算出该元素对应的存储地址。
 

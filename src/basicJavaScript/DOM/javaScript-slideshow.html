@@ -7,18 +7,32 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>javaScript-slideshow-轮播图</title>
     <style>
-        .active {
-            background-color: skyblue;
+        /* 鼓捣一番，发现<div>、<span>这类标签没法控制其各种css属性，
+           也就是说，这两种标签是没实际width啊，height啊，margin啊之
+           类的。
+        */
+
+        /* 横幅css */
+        
+        h1 {
+            color: green;
+            background-color: yellowgreen;
+            text-align: center;
         }
 
-        .slidebutton {
-            position: relative;
-            width: 730px;
-            display: flex;
-            justify-content: center;
+        /* 居中一个块元素且不居中它的行内内容的标准兼容的方法是将它的左、右margin设为auto, 
+        例如：margin:auto; 或margin:0 auto; 或margin-left:auto; margin-right:auto; */
+        /* 轮播图容器css */
+        .imgContainer {
+            width: 45.625rem;
+            height: 21.000rem;
+            margin: auto;
         }
 
+
+        /* ul的css设置 */
         .indexes {
+            border: 1px solid red;
             /* width: 100px; */
             height: 20px;
             /* background-color: #000; */
@@ -38,6 +52,7 @@
 
         }
 
+        /* li的css设置 */
         .indexes li {
             background-color: #fff;
             width: 20px;
@@ -48,32 +63,37 @@
 
         }
 
+        /* li的css设置 */
         .indexes li.active {
-            background-color: rgba(85,166,233,0.76) ;
+            background-color: rgba(85, 166, 233, 0.76);
         }
     </style>
 </head>
 
 <body>
-    DOM document object model 文档对象模型
-    <div id="slideshow">
-        <h1>Simba</h1>
+    <b>document object model 文档对象模型</b>
+    <!-- 横幅 -->
+    <div id="banner">
+        <h1>轮播图 In JavaScript</h1>
     </div>
-        <img id="slideshowImg" src="http://p1.music.126.net/6Ebiv9W15ipPcpnlmDmkKA==/109951164415299765.jpg" alt="">
-        <div class="slidebutton">
-            <ul class="indexes">
-                <li class="active"></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </div>
-    
+    <!-- 轮播的容器 -->
+    <div class="imgContainer">
+        <!-- 轮播的图片 -->
+        <img  id="slideshowImg" src="http://p1.music.126.net/6Ebiv9W15ipPcpnlmDmkKA==/109951164415299765.jpg" alt="">
+        <!-- 轮播图的切换按钮 -->
+        <ul class="indexes">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
 
 
     <script>
         // 根据 id 获取标签节点
-        var slideshow = document.getElementById('slideshow');
+        var imgContainer = document.getElementById('imgContainer');
 
         // 4-1、定义一个数组，存几张图片
         let arr = [
@@ -83,17 +103,21 @@
             "http://p1.music.126.net/mFGqBD19zNW2D1yyOP0fnw==/109951164415341803.jpg"
         ];
 
+        
         let slideshowImg = document.getElementById('slideshowImg');
         let indexes = document.getElementsByClassName('indexes');
         console.log(indexes);
         // slideshowImg.src = arr[2];
-
+        // id:定义唯一标识符（ID），该标识符在整个文档中必须是唯一的。 其目的是在链接（使用片段标识符），脚本或样式（使用CSS）时标识元素。
+        // 这有一点：如果是使用getElementByClassName,则会打印undefined；
+        // 因为在html中，id才是唯一的，class是可以有多个或者重复的，所以
+        // getElementsByClassName拿到的是伪数组，所以用getElementById才能识别。
+        let banner = document.getElementById('banner');
         // 1、innerHTML和innerText的区别
-
         // 1-1、打印html标签也能找到打印出来
-        console.log(slideshow.innerHTML);
+        console.log(banner.innerHTML);
         // 1-2、只能打印纯字符
-        console.log(slideshow.innerText);
+        console.log(banner.innerText);
 
         // 2、控制样式的属性style
 
@@ -117,11 +141,11 @@
         setInterval(() => {
             // 4-4、每次进来后自增一次
             index++;
-            // 4-5、这个数组的元素有[0,1,2,3]，当index = 3 的时候，设置回index=0   
+            // 4-5、这个数组的元素有[0,1,2,3]，当index = 4 的时候，设置回index=0   
             if (index === 4) {
                 index = 0;
             }
-            // 这里也可以这么写：if(index===3) index =0;
+            // 上面也可以这么简写：if(index===3) index =0;
 
             // 4-2、切下标 
             slideshowImg.src = arr[index];

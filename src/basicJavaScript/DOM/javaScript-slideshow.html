@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>javaScript-slideshow-轮播图</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         /* 鼓捣一番，发现<div>、<span>这类标签没法控制其各种css属性，
            也就是说，这两种标签是没实际width啊，height啊，margin啊之
@@ -14,42 +15,37 @@
 
         /* 横幅css */
         
-        h1 {
-            color: green;
-            background-color: yellowgreen;
-            text-align: center;
-        }
 
         /* 居中一个块元素且不居中它的行内内容的标准兼容的方法是将它的左、右margin设为auto, 
         例如：margin:auto; 或margin:0 auto; 或margin-left:auto; margin-right:auto; */
         /* 轮播图容器css */
-        .imgContainer {
-            width: 45.625rem;
-            height: 21.000rem;
-            margin: auto;
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none ;
         }
 
+        .imgContainer {
+            width: 730px;
+            position: relative;
+        }
 
         /* ul的css设置 */
         .indexes {
-            border: 1px solid red;
-            /* width: 100px; */
             height: 20px;
-            /* background-color: #000; */
             display: flex;
             position: absolute;
             /* 这里不要写0值，赋0值的话会贴到图片底部，不美观 */
             bottom: 10px;
             /* 居中的写法 */
             /* left: calc(50% - 50px); */
-            /* left: 50%;
-            transform: translateX(-50%); */
+            left: 50%;
+            transform: translateX(-50%);
             /* margin: auto;
             left: 0;
             right: 0;
             top: 0;
             bottom: 0; */
-
         }
 
         /* li的css设置 */
@@ -59,13 +55,11 @@
             height: 20px;
             border-radius: 50%;
             margin: 0 3px;
-
-
         }
 
         /* li的css设置 */
         .indexes li.active {
-            background-color: rgba(85, 166, 233, 0.76);
+            background: rgba(85, 166, 233, 0.76);
         }
     </style>
 </head>
@@ -73,8 +67,8 @@
 <body>
     <b>document object model 文档对象模型</b>
     <!-- 横幅 -->
-    <div id="banner">
-        <h1>轮播图 In JavaScript</h1>
+    <div id="banner" class="container">
+        <h1 class="alert alert-info" role="alert">轮播图 In JavaScript</h1>
     </div>
     <!-- 轮播的容器 -->
     <div class="imgContainer">
@@ -105,7 +99,7 @@
 
         
         let slideshowImg = document.getElementById('slideshowImg');
-        let indexes = document.getElementsByClassName('indexes');
+        let indexes = document.getElementsByClassName('indexes')[0].children;
         console.log(indexes);
         // slideshowImg.src = arr[2];
         // id:定义唯一标识符（ID），该标识符在整个文档中必须是唯一的。 其目的是在链接（使用片段标识符），脚本或样式（使用CSS）时标识元素。
@@ -138,7 +132,7 @@
         // 3-2、设置每隔多久执行
         // 4-3、把数组中的元素索引定义为变量
         var index = 0;
-        setInterval(() => {
+        let timer = setInterval(() => {
             // 4-4、每次进来后自增一次
             index++;
             // 4-5、这个数组的元素有[0,1,2,3]，当index = 4 的时候，设置回index=0   
@@ -149,13 +143,27 @@
 
             // 4-2、切下标 
             slideshowImg.src = arr[index];
-
+            // 删除旧的active 
+            let active = document.getElementsByClassName('active')[0];
+            active.classList.remove('active');
+            // 增加新的active ，这样就达到了显示当前的图片的效果
+            indexes[index].classList.add("active");
             // 每隔一秒打印1次当前日期
             //  console.log(new Date());
+        }, 1000);
 
-        }, 1500);
+        for (let i = 0; i < indexes.length; i++) {
 
-
+            indexes[i].onmouseenter = function () {
+                let active = document.getElementsByClassName('active')[0];
+                active.classList.remove('active');
+                this.classList.add('active');
+                clearInterval (timer);
+                slideshowImg.src = arr[i];
+            }
+            
+            
+        }
 
 
 

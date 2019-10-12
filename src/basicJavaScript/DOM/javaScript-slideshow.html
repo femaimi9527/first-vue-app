@@ -266,7 +266,7 @@
         function run() {
             timer = setInterval(() => {
                 index++;
-                if (index === 4) index = 0;
+                if (index === arr.length) index = 0;
                 setStyle()
             }, 1200);
         }
@@ -282,7 +282,7 @@
 
         function prev() {
             index--;
-            if (index=== -1) index = 3;
+            if (index=== -1) index = arr.length - 1;
             clearInterval(timer);
             setStyle();
             run()
@@ -298,5 +298,4 @@
         }
     </script>
 </body>
-
 </html>

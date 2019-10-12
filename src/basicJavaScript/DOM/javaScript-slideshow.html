@@ -28,11 +28,12 @@
         例如：margin:auto; 或margin:0 auto; 或margin-left:auto; margin-right:auto; */
         /* 轮播图容器css */
         .imgContainer {
-            margin: auto;
+            margin:auto;
             width: 730px;
             position: relative;
             display: flex;
             justify-content: center;
+            align-items: center;
         }
 
         /* ul的css设置 */
@@ -54,6 +55,7 @@
             right: 0;
             top: 0;
             bottom: 0; */
+
         }
 
         /* li的css设置 */
@@ -69,6 +71,24 @@
         .indexes li.active {
             background-color: rgba(85, 166, 233, 0.76);
         }
+
+        .arrow {
+            width: 30px;
+            height: 50px;
+            background: #17a2b8;
+            position: absolute;
+        }
+
+        .arrow.arrow-left {
+            left: -50px;
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 50%;
+        }
+        .arrow.arrow-right {
+            right: -50px;
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+        }
     </style>
 </head>
 
@@ -80,6 +100,9 @@
     </div>
     <!-- 轮播的容器 -->
     <div class="imgContainer">
+        <!-- 轮播图左右翻页按钮 -->
+        <div class="arrow arrow-left" onclick="prev()"></div>
+        <div class="arrow arrow-right" onclick="next()"></div>
         <!-- 轮播的图片 -->
         <img id="slideshowImg" src="http://p1.music.126.net/S9uZmgH93OSX878F46ATUA==/109951164420149100.jpg" alt="">
         <!-- 轮播图的切换按钮 -->
@@ -245,7 +268,7 @@
                 index++;
                 if (index === 4) index = 0;
                 setStyle()
-            }, 1000);
+            }, 1200);
         }
         // 封装样式改变
         function setStyle() {
@@ -256,6 +279,23 @@
         }
         // 默认状态run()
         run();
+
+        function prev() {
+            index--;
+            if (index=== -1) index = 3;
+            clearInterval(timer);
+            setStyle();
+            run()
+
+        }
+
+        function next() {
+            index++;
+            if (index===4) index = 0;
+            clearInterval(timer);
+            setStyle();
+            run()
+        }
     </script>
 </body>
 

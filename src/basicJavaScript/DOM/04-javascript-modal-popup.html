@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>javascript-modal弹出层右键拖动效果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #modal {
+            width: 100px;
+            height: 100px;
+            background: #ccc;
+            cursor: move;
+            /* 想要拖动的位置设定 */
+            position: absolute;
+            top: 100px;
+            left: 800px;
+        }
+
+        #modal:hover {
+            /* 略灰色的阴影 */
+            box-shadow: 5px 5px 10px #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width: 1200px;height:2000px;background:olivedrab;"></div>
+    <div id="modal"></div>
+
+    <script>
+        // 封装：建议定义的名字都加个$符号，调用$m就是调用下面函数
+        function $m(str) {
+            console.log(str)
+        }
+
+        let modal = document.getElementById('modal');
+        // 全局变量中转一下：定义布尔变量命名一看即懂规范
+        let canMove = false;
+
+        /** 
+        *   通过一个布尔变量来标记当前鼠标是按下还是抬起 
+        *   在move事件中，判断此变量，如果是true则将当前鼠标位置赋值给div
+        *   抬起时变量为false，则鼠标移动不再生效
+        **/
+        // 可以这么写：因为如果参数只有一个的话，可以省略写“e”
+        // modal.onmousedown = () => {
+        modal.onmousedown = (e) => {
+            $m('鼠标按下')
+            canMove = true;
+        }
+
+        modal.onmousemove = (e) => {
+            $m('鼠标移动')
+            if(canMove){
+                $m('鼠标有效移动')
+                console.log(e.pageX,e.pageY);
+            }
+        }
+
+        modal.onmouseup = (e) => {
+            $m('鼠标抬起')
+            canMove = false;
+        }    
+
+    </script>
+</body>
+
+</html>

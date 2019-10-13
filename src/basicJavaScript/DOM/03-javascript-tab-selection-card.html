@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js原生的tab选项卡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .container {
+            width: 500px;
+            border: 2px solid black;
+            margin: 100px auto;
+        }
+
+        .title {
+            display: flex;
+        }
+
+        .title li {
+            padding: 10px 0;
+            flex: 1;
+            text-align: center;
+        }
+
+        .title li.active {
+            background: rgb(131, 171, 224);
+            color: #fff;
+        }
+
+        .content {
+            padding: 10px;
+        }
+        .content li {
+            display: none;
+        }
+        .content li.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul class="title">
+            <li class="active">汽车票</li>
+            <li>火车票</li>
+            <li>飞机票</li>
+        </ul>
+        <ul class="content">
+            <!-- <li>汽车票列表展示!@a a 这里有汽车票买啊！@</li> -->
+            <!-- <li style="display: none">火车票列表展示!@a a 这里有火车票买啊！@</li> -->
+            <!-- <li style="display: none">飞机票列表展示!@a a 这里有飞机票买啊！@</li> -->
+            <li class="active">汽车票列表展示!@a a 这里有汽车票买啊！@111111</li>
+            <li>火车票列表展示!@a a 这里有火车票买啊！@222222</li>
+            <li>飞机票列表展示!@a a 这里有飞机票买啊！@333333</li>
+        </ul>
+    </div>
+    <div class="container"></div>
+
+    <script>
+        // 封装的基础知识
+        // 传入两个参数，a，b ，且b默认赋值是10
+        // function add(a, b = 10) {
+        //     console.log(a+b)
+        // }
+        // // 如果传入a，b的值，则使用传入的值
+        // add(20,30); //结果是50 （20+30=）
+        // // 如果只传入a的值，则b使用默认的值b = 10
+        // add(20); //结果是30  （20+10=）
+
+        // 封装
+        function g(name,obj = document) {
+            return obj.getElementsByClassName(name);
+        }
+
+        let title = g('title')[0];
+        let content = g('content')[0];
+        // let title = document.getElementsByClassName('title')[0];
+        // let content = document.getElementsByClassName('content')[0];
+
+        let titlelist = title.children;
+        let contentlist = content.children;
+
+        for (let i = 0; i < titlelist.length; i++) {
+            let item = titlelist[i];
+            item.onclick = () => {
+                // 这里的问题是：classname会有存在重复的可能
+                // let active = title.getElementsByClassName('active')[0];
+                let active = g('active',title)[0];
+                active.classList.remove('active');
+                item.classList.add('active');
+                // 隐藏所有的，让自己显示
+                // for (let j = 0; j < contentlist.length; j++) {
+                //     contentlist[j].style.display="none";                    
+                // }
+                // contentlist[i].style.display="block";
+                // 优化写法
+                // 切换active ，让有的隐藏，没的加上，把显示和隐藏交给样式表
+                let contentactive = g('active', content)[0];
+                contentactive.classList.remove('active')
+                contentlist[i].classList.add('active')
+            }
+        }
+    </script>
+</body>
+
+</html>

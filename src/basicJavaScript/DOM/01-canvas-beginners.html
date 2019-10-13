@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas入门</title>
+    <style>
+        #canvasTest {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <!-- 入门canvas  什么百度地图啊，echart.js图表啊就是用canvas做的-->
+    <canvas id="canvasTest"></canvas>
+
+    <!-- 5-1 定义一个改变画笔颜色的input标签 -->
+    <input type="color" id="color" onchange= 'setcolor()'>
+    <!-- 5-3 定义一个图片标签，根据id存放画出来的图片 -->
+    <img src="#" id="sb">
+    <button onclick= save()>保存</button>
+
+    <script>
+        // 5-2 用js绑定 input标签的 颜色选择函数，改变画笔颜色
+        function setcolor () {
+            context.strokeStyle = color.value;
+        };
+
+        // 一、canvas画布画个放大镜实操
+
+        // 定义了 test 和 context 两个变量
+        let test = document.getElementById('canvasTest');
+        // // 获取上下文，可以理解为一个画笔
+        let context = test.getContext('2d');
+        // 接下来就可以画了
+
+        // 生成保存到本地的 base64 格式字符串
+        function save() {
+            // 5-4 赋值保存的base64字符串给id为sb的img标签
+            sb.src = test.toDataURL('images/png');
+            // console.log(1);
+            // console.log(context.toDataURL('image/png'));
+            // console.log(test.toDataURL('image/png'));
+            // console.table(context);
+        };
+
+
+        // // 第1步：先把画笔移动到某一个位置
+        // context.moveTo(30,20);
+        // // 第2步：画一笔,画几笔，一个lineTo就画一笔
+        // context.lineTo(80,20);
+        // context.lineTo(30,50);
+        // context.lineTo(200,100);
+        // // 第3步：设置画笔的颜色，stroke是“笔，笔锋”的意思
+        // context.strokeStyle = 'red';
+        // // 第3步：设置笔锋粗细
+        // context.lineWidth = 5 ;
+        // // 第4步：实现
+        // context.stroke();
+        // // 关掉上一步
+        // context.closePath();
+        // // 再画一次
+        // context.beginPath();
+        // // 画个圆,需要5个参数，最后两个是表示从哪个角画到哪个角
+        // context.arc(60,60,60, Math.PI * 270,Math.PI * 180);
+        // // 执行画的方法
+        // context.stroke();
+        // // 填充颜色
+        // // 1：设置颜色
+        // context.fillStyle = 'orange';
+        // // 2：执行填充动作
+        // context.fill();
+        // // 关掉，再打开
+        // context.closePath();
+        // context.beginPath();
+        // // 画个矩形
+        // context.rect(60,60,30,40);
+        // context.stroke();
+        // context.fillStyle = '#000';
+        // context.fill();
+
+        
+        // 二、canvas画布用鼠标签名实操
+
+        // 初始化canMove变量为false
+        var canMove = false;
+
+        // 拖动的写法
+        test.onmousedown = (e) => {
+            canMove = true;
+            context.beginPath();
+            context.moveTo(e.pageX, e.pageY);
+        };
+
+        // 鼠标移动
+        test.onmousemove = (e) => {
+            if (canMove) {
+                context.lineTo(e.pageX,e.pageY);
+                context.stroke();
+            }
+        };
+
+        // 鼠标松开
+        window.onmouseup = (e) => {
+            canMove = false;
+            context.closePath();
+        }
+
+        // html页面右键“图片另存为”还可以保存画布画的内容为图片
+    </script>
+</body>
+</html>

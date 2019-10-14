@@ -163,18 +163,19 @@
                 modal.style['left'] = (e.clientX - e.offsetX) + 'px';
                 modal.style['top'] = (e.clientY - e.offsetY) + 'px';
             }
+            // X,Y最终的值
             var x = e.clientX - offsetX;
             var y = e.clientY - offsetY;
             var maxLeft = window.innerWidth - modal.offsetWidth;
             var maxTop = window.innerHeight - modal.offsetHeight;
             //  做范围限制
-            if (x < 0) x = 0;
+            if (x < 0) x = 0
             else if (x > maxLeft) x = maxLeft;
-            if (y < 0) y = 0;
+            if (y < 0) y = 0
             else if (y > maxTop) y = maxTop;
 
             // 阻止默认行为
-            e.preventDefault();
+            // e.preventDefault();
 
             // modal.style.width是有px单位的，下面的计算法是纯数字，更好
             // if (x > window.innerWidth - modal.offsetWidth);

@@ -15,12 +15,13 @@
         #app {
             width: 200px;
             height: 200px;
-            background: red;
+            background: yellowgreen;
+            /* 解决margin转移问题，html的毛病 */
             overflow: hidden;
             
         }
 
-        #app2 {
+        #appInside {
             width: 100px;
             height: 100px;
             margin: 30px;
@@ -30,9 +31,31 @@
 </head>
 <body>
     <div id="app">
-        <div id="app2">
+        <div id="appInside">
 
         </div>
     </div>
+
+    <script>
+        // 封装“document.getElementById”
+        function g(id) {
+            return document.getElementById(id)           
+        }
+
+        let app = g('app')
+        let appInside =g('appInside') 
+
+        app.onclick = () => {
+            console.log('app')
+        }
+
+        appInside.onclick = () => {
+            console.log('appInside')
+        }
+
+        document.body.onclick = () => {
+            console.log('body')
+        }
+    </script>
 </body>
 </html>

@@ -7,32 +7,32 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>javascript-modal弹出层右键拖动效果</title>
     <style>
+        /* #modal { */
+        /* width: 100px; */
+        /* width: 200px; */
+        /* height: 100px; */
+        /* height: 200px; */
+        /* background: #ccc; */
+        /* cursor: move; */
+        /* 想要拖动的位置设定 */
+        /* position: absolute; */
+        /* top: 100px; */
+        /* left: 800px; */
+        /* left: 800px; */
+        /* 控制页面div内字不能选择 */
+        /* user-select: none; */
+        /* } */
+
+        /* #modal:hover { */
+        /* 略灰色的阴影 */
+        /* box-shadow: 5px 5px 10px #eee; */
+        /* } */
+
         * {
             margin: 0;
             padding: 0;
             list-style: none;
         }
-
-        /* #modal { */
-            /* width: 100px; */
-            /* width: 200px; */
-            /* height: 100px; */
-            /* height: 200px; */
-            /* background: #ccc; */
-            /* cursor: move; */
-            /* 想要拖动的位置设定 */
-            /* position: absolute; */
-            /* top: 100px; */
-            /* left: 800px; */
-            /* left: 800px; */
-            /* 控制页面div内字不能选择 */
-            /* user-select: none; */
-        /* } */
-
-        /* #modal:hover { */
-            /* 略灰色的阴影 */
-            /* box-shadow: 5px 5px 10px #eee; */
-        /* } */
 
         #layer {
             width: 100vw;
@@ -41,20 +41,22 @@
             z-index: 999;
             top: 0;
             left: 0;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
+            /* 让modal这个div在整个网页居中显示，理解成让layer中包含的div居中布局 */
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         #modal {
-             /* 模态框用 */
-             width: 500px;
+            /* 模态框用 */
+            width: 500px;
             height: 400px;
             background: #fff;
             position: absolute;
             user-select: none;
         }
+
         #modal:hover {
             /* 略灰色的阴影 */
             box-shadow: 5px 5px 10px #eee;
@@ -66,12 +68,13 @@
             padding: 20px;
             background: #f5f5f5;
             color: grey;
-            cursor: move;
+            font-size: larger;
         }
 
         #close {
             /* 鼠标十字架箭头变成正常箭头 */
             cursor: default;
+            box-shadow: 1px 1px 1px bisque;
         }
     </style>
 </head>
@@ -81,20 +84,22 @@
     <input type="text">
     <div id="layer">
         <div id="modal">
-            <div id="title">登录</div>
-            <div id="close">X</div>
+            <div id="title">
+                <div>登录</div>
+                <div id="close">X</div>
+            </div>
         </div>
     </div>
     <!-- <div style="width: 1200px;height:2000px;background:olivedrab;"></div> -->
     <!-- <div id="modal"></div> -->
     <!-- <div style="width: 1200px;height:2000px;"> -->
-        <!-- <div id="modal"> -->
-            <!-- 写上字，然后双击字拖动会有bug -->
-            <!-- <div style="width: 100px;height: 100px;background:lightpink;margin-left: 100px;"></div>  -->
-        <!-- </div> -->
+    <!-- <div id="modal"> -->
+    <!-- 写上字，然后双击字拖动会有bug -->
+    <!-- <div style="width: 100px;height: 100px;background:lightpink;margin-left: 100px;"></div>  -->
+    <!-- </div> -->
     <!-- </div> -->
     <!-- <div id="contextMenu"> -->
-        <!-- 删除 -->
+    <!-- 删除 -->
     <!-- </div> -->
 
 
@@ -148,10 +153,10 @@
         // }
 
         // modal.onmousemove = (e) => {
-        window.oncontextmenu = e => {
-            console.log('测试阻止右键菜单')
-            e.preventDefault();
-        }
+        // window.oncontextmenu = e => {
+        //     console.log('测试阻止右键菜单')
+        //     e.preventDefault();
+        // }
         window.onmousemove = (e) => {
             // 阻止默认事件触发
             e.preventDefault();

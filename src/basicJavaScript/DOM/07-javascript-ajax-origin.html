@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>07-javascript-原生ajax</title>
+</head>
+
+<body>
+    <script>
+        // jquery写法
+        $get({
+            url: 'http://www.my-lawcloud.com.cn/back/commissionInfo/getAllCommission?Authorization=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ4aWFveGlhb21pbiIsImtleV9pZCI6OTcsImtleV9uYW1lIjoiJUU4JTgyJTk2JUU2JTk5JTkzJUU2JTk1JThGIiwia2V5X3JvbGVzIjoiNCIsImtleV9pc19zeXN0ZW0iOjAsImtleV9kYXRhIjoiIiwia2V5X29yZ2lkIjoxLCJrZXlfY29tbWlkIjoxLCJrZXlfYWRtaW5fdHlwZSI6IjUwIiwia2V5X2VudGVycHJpc2VfaWQiOjAsImV4cCI6MTU3MTI4NzM3OH0.OpSbJLdSHkRsZunYMNULoxiV61uj8IY-UG8suD9EkdvTEgAbyheNelBPDo6ptHNiyGRyW5TrH9SSBDUcBURl0BT5_vyaGy6tvtRbs1zmMZX7OzB85rGCCMES9getWn1l2hWzsXrfGIEihx2K-aBGCv0jc-LxH22zq7pRIT69pMM&Content-Type=application/json',
+            type: 'GET',
+            async: true
+        });
+        function $get(option) {
+            let ajax = new XMLHttpRequest()
+            ajax.onreadystatechange = () => {
+                if (ajax.readyState === 4)
+                    // console.log(ajax.status)
+                    if (ajax.status === 200) {
+                        console.log(ajax.response)
+                    }
+            }
+            ajax.open(option.type,option.url,option.async)
+            ajax.send()
+        }
+
+
+        // ajax写法
+        // let ajax = new XMLHttpRequest()
+        // ajax.onreadystatechange = () => {
+        //     if (ajax.readyState === 4)
+        //         // console.log(ajax.status)
+        //         if (ajax.status === 200) {
+        //             console.log(ajax.response)
+        //         }
+        // }
+        // ajax.open('GET', 'http://www.my-lawcloud.com.cn/back/commissionInfo/getAllCommission?Authorization=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ4aWFveGlhb21pbiIsImtleV9pZCI6OTcsImtleV9uYW1lIjoiJUU4JTgyJTk2JUU2JTk5JTkzJUU2JTk1JThGIiwia2V5X3JvbGVzIjoiNCIsImtleV9pc19zeXN0ZW0iOjAsImtleV9kYXRhIjoiIiwia2V5X29yZ2lkIjoxLCJrZXlfY29tbWlkIjoxLCJrZXlfYWRtaW5fdHlwZSI6IjUwIiwia2V5X2VudGVycHJpc2VfaWQiOjAsImV4cCI6MTU3MTI4NzM3OH0.OpSbJLdSHkRsZunYMNULoxiV61uj8IY-UG8suD9EkdvTEgAbyheNelBPDo6ptHNiyGRyW5TrH9SSBDUcBURl0BT5_vyaGy6tvtRbs1zmMZX7OzB85rGCCMES9getWn1l2hWzsXrfGIEihx2K-aBGCv0jc-LxH22zq7pRIT69pMM&Content-Type=application/json', true)
+        // ajax.send()
+    </script>
+</body>
+
+</html>

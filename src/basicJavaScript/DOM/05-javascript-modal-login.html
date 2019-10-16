@@ -12,6 +12,7 @@
             padding: 0;
             list-style: none;
         }
+
         #layer {
             width: 100vw;
             height: 100vh;
@@ -24,52 +25,123 @@
             justify-content: center;
             align-items: center;
         }
+
         #modal {
             /* 模态框用 */
             width: 500px;
             height: 400px;
-            background: #fff;  
+            background: #fff;
             position: absolute;
             user-select: none;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+            align-content: space-between;
         }
+
         #modal:hover {
             /* 略灰色的阴影 */
             box-shadow: 5px 5px 10px #eee;
         }
+
         #title {
-            display: flex;
-            justify-content: space-between;
             padding: 20px;
             background: #f5f5f5;
             color: grey;
             cursor: move;
+            display: flex;
+            /* flex-direction: row; */
+            
         }
+
         #close {
             /* 鼠标十字架箭头变成正常箭头 */
             cursor: default;
         }
+
+        #login {
+            width: auto;
+            height: auto;
+            margin: 20px;
+            padding: 20px;
+            border: 1px 1px 1px dashed yellowgreen;
+            color: grey;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #username {
+            margin: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            flex-grow: 2;
+        }
+
+        #passowrd {
+            margin: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            flex-grow: 2;
+        }
+
+        #btn {
+            margin: 5px;
+            padding: 1px;
+            display: flex;
+            flex-grow: 0;
+        }
+
+        #btnInside {
+            width: 90px;
+            margin: 10px;
+            padding: 10px;
+            color: #f5f5f5;
+            border-radius: 10%;
+            background: rgb(161, 182, 148);
+        }
     </style>
 </head>
+
 <body>
     <!-- 模态框 -->
     <div id="layer">
         <div id="modal">
-            <div id="title">登录</div>
-            <div id="close">X</div>
+            <div id="title">
+                <div>登录</div>
+                <div id="close">X</div>
+            </div>
+            <div id="login">
+                <div id="username">
+                    <div>账号：</div>
+                    <div><input type="text" placeholder="请输入用户名"></div>
+                </div>
+                <div id="passowrd">
+                    <div>密码：</div>
+                    <div><input type="text" placeholder="请输入密码"></div>
+                </div>
+                <div id="btn">
+                    <button id="btnInside">登录</button>
+                </div>
+            </div>
         </div>
     </div>
-    <div style="width: 1200px;height: 2000px;">
-        <input type="text">
-    </div>
+
 
 
 
     <script>
         // 封装：建议定义的名字都加个$符号，调用$m就是调用下面函数
-        function $m(str) {
+        function $lg(str) {
             console.log(str)
         }
         let modal = document.getElementById('modal');
+        let title = document.getElementById('title')
         let close_btn = document.getElementById('close')
         let layer = document.getElementById('layer')
         let canMove = false;
@@ -87,13 +159,13 @@
             layer.remove();
         }
         title.onmousedown = e => {
-            $m('鼠标按下')
+            $lg('鼠标按下')
             // 当鼠标按下时，记住鼠标在DIV中的位置，便于移动时减掉
             offsetX = e.pageX - modal.offsetLeft;
             offsetY = e.pageY - modal.offsetTop;
             canMove = true;
         }
-       
+
 
 
     </script>

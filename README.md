@@ -1,31 +1,37 @@
 # first-vue-app
 
 ## Project setup
-```
+
+``` 
 npm install
 ```
 
 ### Compiles and hot-reloads for development
-```
+
+``` 
 npm run serve
 ```
 
 ### Compiles and minifies for production
-```
+
+``` 
 npm run build
 ```
 
 ### Run your tests
-```
+
+``` 
 npm run test
 ```
 
 ### Lints and fixes files
-```
+
+``` 
 npm run lint
 ```
 
 ### Customize configuration
+
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 1、学习了canvas的一点基础， 画图，在线签名，保存图片；
@@ -38,7 +44,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 最简单的数据结构类型是一维数组。例如，索引为0到9的32位整数数组，可作为在存储器地址2000，2004，2008，...2036中，存储10个变量，因此索引为i的元素即在存储器中的2000+4×i地址。数组第一个元素的存储器地址称为第一地址或基础地址。
 
-二维数组，对应于数学上的矩阵概念，可表示为二维矩形格。例如：{\displaystyle a={\begin{bmatrix}3&6&2\\0&1&-4\\2&-1&0\end{bmatrix}}}{\displaystyle a={\begin{bmatrix}3&6&2\\0&1&-4\\2&-1&0\end{bmatrix}}}在C语言中表示为int a[3][3] = {{3, 6, 2}, {0, 1, -4}, {2, -1, 0}};。
+二维数组，对应于数学上的矩阵概念，可表示为二维矩形格。例如：{\displaystyle a={\begin{bmatrix}3&6&2\\0&1&-4\\2&-1&0\end{bmatrix}}}{\displaystyle a={\begin{bmatrix}3&6&2\\0&1&-4\\2&-1&0\end{bmatrix}}}在C语言中表示为int a[3][3] = {{3, 6, 2}, {0, 1, -4}, {2, -1, 0}}; 。
 
 在某些情况下，“向量”一词也可能代表二维数组，虽然在数学意义上更确切地称呼为元组（tuple），而不是向量。但需要注意的是：计算机科学的某些领域，如Matlab，元组是指类似C语言struct类型，具有固定的往往是不同类型的数据成员的数据结构。
 
@@ -51,3 +57,28 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 数组一词通常用于表示数组数据类型，一种大多数高端编程语言都会内置的数据类型。数组类型通常由数组结构来实现；然而在某些语言中，它们可以由散列表、链表、搜索树或其它数据结构来实现。
 
 在算法的描述中，数组一词特别着重意义为关系数组或“抽象的数组”，一种理论上的计算机科学模型（抽象数据类型或 ADT），专注于数组的基本性质上。
+
+## 3、第七课：事件冒泡；demo文件：src/basicJavaScript/DOM/06-javascript-event-popup.html
+
+### 3-1、事件冒泡和默认行为的区别：
+
+### 3-2、margin转移知识点：CSS样式中给父级盒子加“overflow:hidden”解决。
+
+### 3-3、封装“document.getElementById”语句，还可以自定义一个.js文件再script标签引入进来
+/** 当语句调用get的时候，实际上是调用了 function get，
+         *  获取到了document.getElementById(id)对象，
+         *  然后把对象返回回来。
+         *  然后赋值给app 和appInside 
+         */
+### 3-4、阻止事件冒泡：当A中包含B，且A和B都绑定了同样的事件，
+    *  点击B的时候会触发A的事件，如果希望阻止A的事件，
+    *  则可以使用 e.stopPropogation() 阻止
+### 3-5、冒泡事件中的执行次数引申出的js的函数定义理解和事件监听的使用和理解：
+#### 3-5-1、问题提出：如果同样的app.onclick()代码写多遍，是否会全部执行？
+实验证明：只走了最后一个函数，为什么？app是对象，不管写多少遍，都只是方法的定义阶段，并没有真的调用了，当执行了才是真的调用了。
+#### 3-5-2、事件监听能提供执行两个的方案，
+app.addEventListener('click',function(){
+    console.log('123')
+});
+
+

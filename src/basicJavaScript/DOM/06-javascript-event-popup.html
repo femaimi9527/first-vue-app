@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>javascript-事件冒泡</title>
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -18,7 +18,7 @@
             background: yellowgreen;
             /* 解决margin转移问题，html的毛病 */
             overflow: hidden;
-            
+
         }
 
         #appInside {
@@ -29,7 +29,12 @@
         }
     </style>
 </head>
+
 <body>
+    <!-- 阻止默认行为示例： -->
+    <a href="https://www.baidu.com" id="test">百度</a>
+
+    <!-- 事件冒泡示例： -->
     <div id="app">
         <div id="appInside">
 
@@ -37,25 +42,70 @@
     </div>
 
     <script>
-        // 封装“document.getElementById”
-        function g(id) {
-            return document.getElementById(id)           
+        // 封装“document.getElementById”语句，还可以自定义一个.js文件再script标签引入进来
+
+        function get(id) {
+            return document.getElementById(id)
+        }
+        /** 当下面语句调用get的时候，实际上是调用了 function get，
+         *  获取到了document.getElementById(id)对象，
+         *  然后把对象返回回来。
+         *  然后赋值给app 和appInside 
+         */
+
+        // 阻止默认行为示例：阻止了<a>标签默认的链接跳转行为。
+        let test = get('test');
+        test.onclick = (e) => {
+            e.preventDefault()
         }
 
-        let app = g('app')
-        let appInside =g('appInside') 
+        // 事件冒泡示例：
+        let app = get('app')
+        let appInside = get('appInside')
 
         app.onclick = () => {
-            console.log('app')
+            console.log('app');
+            document.body.style['background'] = "purple";
         }
 
-        appInside.onclick = () => {
-            console.log('appInside')
+        /**
+         * app.onclick = () => {
+         *      console.log('123');
+         *      document.body.style['background'] = "purple";
+         * }
+         * app.onclick = () => {
+         *      console.log('123456');
+         *      document.body.style['background'] = "blue";
+         * }
+         * 执行代码发现：只执行了123456，而没有执行123，说明只触发蓝色。
+         * 
+         * var obj = {
+         *      age: 10;
+         * }
+         * obj.age = 20;
+         * obj.age = 30;
+         * 最终结果是：age = 30，前面的值被覆盖了
+         * 
+        */
+
+        appInside.onclick = (e) => {
+            console.log('appInside');
+            app.remove();
+            /** 阻止事件冒泡：当A中包含B，且A和B都绑定了同样的事件，
+             *  点击B的时候会触发A的事件，如果希望阻止A的事件，
+             *  则可以使用 e.stopPropogation() 阻止
+             */
+            e.stopPropagation()
         }
 
         document.body.onclick = () => {
             console.log('body')
         }
+
+        window.onclick = () => {
+            console.log('window')
+        }
     </script>
 </body>
+
 </html>

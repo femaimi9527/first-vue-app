@@ -10,6 +10,73 @@
 
 <body>
     <script>
+        // 一、原生ajax
+        let ajax = new XMLHttpRequest()
+        // 监听事件
+        ajax.onreadystatechange = () => {
+            console.log(ajax.readyState)
+         /**    readyState的含义：
+                0：(未初始化) 还没调用send()方法-正在发送请求；
+                1：(载入) 已调用send()方法；
+                2：(载入完成) send()执行完毕-已接收全部响应内容；
+                3：(交互) 正在解析响应内容；
+                4:(完成) 响应内容解析完成，可以在客户端调用；
+        */
+            if (ajax.readyState === 4) {
+                // 4是完成了，不一定成功，200才是成功
+                console.log(ajax.status)
+                if (ajax.status === 200) {
+                    // 成功了，则获取消息
+                    console.log(ajax.response)
+                    // 回来的是字符串，一般多数时候用json格式
+                }
+            }
+        }
+        ajax.open('GET', 'http://47.92.50.43:8888/sys/shitinglist?keywords=&pageIndex=1&pageSize=10', true)
+        // // 1、路径写错，404；2、参数传错，500；-参数传错或者其他报错可能会导致跨域问题CORS
+        ajax.send()
+        // ajax.open('GET','http://www.my-lawcloud.com.cn/back/zjacInfo/getMainPageInfo?Authorization=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ4aWFveGlhb21pbiIsImtleV9pZCI6OTcsImtleV9uYW1lIjoiJUU4JTgyJTk2JUU2JTk5JTkzJUU2JTk1JThGIiwia2V5X3JvbGVzIjoiNCIsImtleV9pc19zeXN0ZW0iOjAsImtleV9kYXRhIjoiIiwia2V5X29yZ2lkIjoxLCJrZXlfY29tbWlkIjoxLCJrZXlfYWRtaW5fdHlwZSI6IjUwIiwia2V5X2VudGVycHJpc2VfaWQiOjAsImV4cCI6MTU3MTM2NjQ1Mn0.PIyYhXMvK4yH8okqLtQOMxT5BRKfJ7uRq5hnu4GKp-nts2MsTYhxqwXwGWuzkOzrWq8AE3iXa2nnTaE6FmASG-0XTXWS83Tr9cgYL1xPnBJuN5e02RrV6T7691QV5lp_p4UKAKg9aJHLg0wzL3NVpJpAAILd6HrZqE6dF4_p-f8',true)
+        // ajax.send()
+
+        // ajax.open('GET','http://www.my-lawcloud.com.cn/js/i18n/zh_CN.json',true)
+        // ajax.send()
+        
+        
+        // 二、jquery
+        function $get() {
+            let ajax = new XMLHttpRequest()
+        ajax.onreadystatechange = () => {
+            if (ajax.readyState === 4) {
+                console.log(ajax.status)
+                if (ajax.status === 200) {
+                    console.log(ajax.response)
+                };
+            };
+        };
+        $get({
+            url:'http://47.92.50.43:8888/sys/shitinglist?keywords=&pageIndex=1&pageSize=10',
+            type:"GET",
+            async:true
+        });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -------------------------------------------------------------------------------------------------
         // jquery写法
         // $get({
         //     url: 'http://47.92.50.43:8888/sys/shitinglist?keywords=&pageIndex=1&pageSize=10',
@@ -18,16 +85,13 @@
         // });
         // function $get(option) {
 
-            let ajax = new XMLHttpRequest()
-            ajax.onreadystatechange = () => {
-                console.log(ajax.readyState)
-                // if (ajax.readyState === 4)
-                    // Status Code: 200 OK 
-                    // console.log(ajax.status)
-                // if (ajax.status === 200) {
-                //     console.log(ajax.response) 
-                // }
-            }
+            // let ajax = new XMLHttpRequest()
+            // ajax.onreadystatechange = () => {
+            //     console.log(ajax.readyState)
+            //     if (ajax.readyState === 4) console.log(ajax.status)
+            //         // Status Code: 200 OK 
+            //     if (ajax.status === 200)   console.log(ajax.response) 
+            // }
             // ajax.open(option.type, option.url, option.async)
             // ajax.send()
         // }
@@ -41,7 +105,6 @@
             2：(载入完成) send()执行完毕-已接收全部响应内容；
             3：(交互) 正在解析响应内容；
             4:(完成) 响应内容解析完成，可以在客户端调用；
-        
         */
         // let ajax = new XMLHttpRequest()
         // ajax.onreadystatechange = () => {
@@ -62,9 +125,9 @@
         //             console.log(ajax.response)
         //         }
         // }
-        ajax.open('GET', 'http://www.my-lawcloud.com.cn/back/relevantInfo/managerList?Authorization=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ4aWFveGlhb21pbiIsImtleV9pZCI6OTcsImtleV9uYW1lIjoiJUU4JTgyJTk2JUU2JTk5JTkzJUU2JTk1JThGIiwia2V5X3JvbGVzIjoiNCIsImtleV9pc19zeXN0ZW0iOjAsImtleV9kYXRhIjoiIiwia2V5X29yZ2lkIjoxLCJrZXlfY29tbWlkIjoxLCJrZXlfYWRtaW5fdHlwZSI6IjUwIiwia2V5X2VudGVycHJpc2VfaWQiOjAsImV4cCI6MTU3MTMxNjA0OX0.cO0w0aEl3kEpCFjeQWOb3874vdRMREItkkWZcLc27yOhvvWeXFSX_1EQ39ZDA1Hp1ctiCOs6pJscd-tOPwGzicOxa4Ew6YPxpy9-xssDd5S28vrzXOou75DsF8Bj2vwOYKFJA44rKU8Ql_XDrdRki9RK0v_dCZ-UURUe35g7RIM', true)
-        // // 发送请求
-        ajax.send()
+        // ajax.open('GET', 'http://www.my-lawcloud.com.cn/back/relevantInfo/managerList?Authorization=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ4aWFveGlhb21pbiIsImtleV9pZCI6OTcsImtleV9uYW1lIjoiJUU4JTgyJTk2JUU2JTk5JTkzJUU2JTk1JThGIiwia2V5X3JvbGVzIjoiNCIsImtleV9pc19zeXN0ZW0iOjAsImtleV9kYXRhIjoiIiwia2V5X29yZ2lkIjoxLCJrZXlfY29tbWlkIjoxLCJrZXlfYWRtaW5fdHlwZSI6IjUwIiwia2V5X2VudGVycHJpc2VfaWQiOjAsImV4cCI6MTU3MTMxNjA0OX0.cO0w0aEl3kEpCFjeQWOb3874vdRMREItkkWZcLc27yOhvvWeXFSX_1EQ39ZDA1Hp1ctiCOs6pJscd-tOPwGzicOxa4Ew6YPxpy9-xssDd5S28vrzXOou75DsF8Bj2vwOYKFJA44rKU8Ql_XDrdRki9RK0v_dCZ-UURUe35g7RIM', true)
+        // // // 发送请求
+        // ajax.send()
     </script>
 </body>
 

@@ -64,7 +64,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 可作为在存储器地址2000，2004，2008，...2036中，存储10个变量，
 因此索引为i的元素即在存储器中的2000+4×i地址。数组第一个元素的存储器地址称为第一地址或基础地址。
 >**二维数组**，对应于数学上的矩阵概念，可表示为二维矩形格。
->例如：![数组]("https://github.com/femaimi9527/images/blob/images-pictures/array.jpg")
+>例如：![数组]("https://raw.githubusercontent.com/femaimi9527/images/images-pictures/array.jpg")
 在C语言中表示为int a[3][3] = {{3, 6, 2}, {0, 1, -4}, {2, -1, 0}}; 。
 在某些情况下，“向量”一词也可能代表二维数组，虽然在数学意义上更确切地称呼为元组（tuple），而不是向量。
 但需要注意的是：```计算机科学的某些领域，如Matlab，元组是指类似C语言struct类型，具有固定的往往是不同类型的数据成员的数据结构。数组通常用于实现数据库的表格，特别是查询表；表格有时也被当作是数组的同义词。
@@ -95,7 +95,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     则可以使用 e.stopPropogation() 阻止
 ### 3-5、冒泡事件中的执行次数引申出的js的函数定义理解和事件监听的使用和理解：
 #### 3-5-1、问题提出：如果同样的app.onclick()代码写多遍，是否会全部执行？
-    实验证明：只走了最后一个函数，为什么？app是对象，不管写多少遍，都只是方法的定义阶段，并没有真的调用了，当执行了才是真的调用了。
+    实验证明：只走了最后一个函数，为什么？
+    答：app是对象，不管写多少遍，都只是方法的定义阶段，并没有真的调用了，当执行了才是真的调用了。
 #### 3-5-2、事件监听能提供执行两个的方案，
     app.addEventListener('click',function(){
         console.log('123')

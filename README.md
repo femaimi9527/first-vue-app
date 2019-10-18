@@ -67,7 +67,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     因此索引为i的元素即在存储器中的2000+4×i地址。数组第一个元素的存储器地址称为第一地址或基础地址。
 
     **二维数组**，对应于数学上的矩阵概念，可表示为二维矩形格。
-    例如：![Image text](https://raw.github.com/yourName/repositpry/master/yourprojectName/img-folder/test.jpg)
+    例如：![Image text](https://wikimedia.org/api/rest_v1/media/math/render/svg/f3fe7cbb32984a8abfa8a8c364ad767599f8a6c9)
     在C语言中表示为int a[3][3] = {{3, 6, 2}, {0, 1, -4}, {2, -1, 0}}; 。
 
     在某些情况下，“向量”一词也可能代表二维数组，虽然在数学意义上更确切地称呼为元组（tuple），而不是向量。

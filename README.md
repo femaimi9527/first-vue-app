@@ -49,6 +49,13 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 #### 1-4-6、.gitignore——配置哪些文件是被忽略的，代码改动管理；
 #### 1-4-7、public——里面的index.html是生成器的模板，通过这个模板去生成真正的html；
 #### 1-4-8、src——源代码，主要在这里写代码，main.js是程序的主入口，assets存放图片文件，css文件等。
+## 2、基础语法
+### 2-1、v-for
+### 2-2、v-bind
+### 2-3、v-on (@click)
+### 2-4、v-model
+### 2-5、vue的生命周期示意图
+![vue的生命周期](https://raw.githubusercontent.com/femaimi9527/images/images-pictures/vue-lifecircle.jpg)
 
 
 ## 1、学习了canvas的一点基础， 画图，在线签名，保存图片；

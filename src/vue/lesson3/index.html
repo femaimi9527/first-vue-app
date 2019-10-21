@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>lesson3-简单的轮播图</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .container {
+            width: 730px;
+            background: red;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .container img {
+            width: 730px;
+        }
+
+        .indexes {
+            display: flex;
+            position: absolute;
+            bottom: 15px;
+            background: rgba(243, 164, 164, 0.979);
+        }
+
+        .indexes li {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #fff;
+            margin: 0px 5px;
+        }
+
+        .indexes li.active {
+            background: orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <a v-for="item in arr" :key="item.id" :href="item.url">
+                <img :src="item.img" alt="">
+            </a>
+            <ul class="indexes">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false;
+        new Vue({
+            el: "#app",
+            // mounted() {
+            //     setInterval(() => {
+            //         ++this.index;
+            //         if (this.index > this.arr.length - 1) this.index = 0
+            //     }, 1000)
+            // },
+            data() {
+                return {
+                    index =0 ,
+                    arr: [
+                        {
+                            url: "https://music.163.com/mv?id=10897712",
+                            img: "http://p1.music.126.net/hmRcCtE9GAIMq9cRY4ejGQ==/109951164439462039.jpg"
+                        },
+                        {
+                            url: "https://music.163.com/album?id=82523417",
+                            img: "http://p1.music.126.net/g7OBgEZLIefb7rKAi61RnQ==/109951164435141353.jpg"
+                        },
+                        {
+                            url: "https://music.163.com/mv?id=10897712",
+                            img: "http://p1.music.126.net/iMsvHhDJbkv3rZdQKX-4sw==/109951164439428287.jpg"
+                        },
+                        {
+                            url: "https://music.163.com/m/at/5da6bd9774cc99cc188a14cb",
+                            img: "http://p1.music.126.net/YZOG99wUuMXD7XPGjxS8xA==/109951164439419856.jpg"
+                        },
+                        {
+                            url: "https://music.163.com/song?id=1397695464",
+                            img: "http://p1.music.126.net/zVRYRBHYJAcFER_zZToAsQ==/109951164439371588.jpg"
+                        }
+                    ]
+                }
+            },
+        })
+
+    </script>
+</body>
+
+</html>

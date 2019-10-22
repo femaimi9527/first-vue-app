@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 
 Vue.filter("fix3", (val) => {
     if (!val || isNaN(val)) return 0

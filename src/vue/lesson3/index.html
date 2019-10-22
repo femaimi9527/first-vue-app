@@ -52,7 +52,7 @@
              7、可以连用； -->
         <button class="button button-circle button-raised button-primary" @click="--money"
             :disabled="money===0">-</button>
-        <input type="text" v-model.number.trim="money" class="well">
+        <input type="text" v-model.number.trim="money">
         <button class="button button-circle button-raised button-primary" @click="++money"
             :disabled="money===10">+</button>
         <hr>
@@ -78,10 +78,10 @@
     </div>
     <hr>
     <div id="gender">
-        <button @click="--gender" class="button button-raised button-action button-circle button-jumbo"><<<</button> 
-        <input type="text" v-model.number.trim="gender" class="button button-glow button-border button-rounded button-primary">
-        <button @click="++gender" class="button button-raised button-action button-circle button-jumbo">>>></button>
-        <h6>{{gender | fmtGender}}</h6>
+        <button @click="--isMale" :disabled="isMale===0" class="button button-raised button-action button-circle button-jumbo"><<</button> 
+        <input type="text" v-model.number.trim="isMale" class="button button-glow button-border button-rounded button-primary">
+        <button @click="++isMale" :disabled="isMale===2" class="button button-raised button-action button-circle button-jumbo">>></button>
+        <h5 class="button button-glow">{{isMale | fmtGender}}</h5>
     </div>
 
     <script>
@@ -115,7 +115,7 @@
                     // console.log(val)
                     if (val > 10) this.money = 10
                     else if (val < 0) this.money = 0
-                }
+                },
             },
             // 15、局部过滤器
             filters: {
@@ -127,8 +127,23 @@
             },
             data() {
                 return {
-                    money: 1,
-                    gender: 0
+                    money: 1                  
+                }
+            },
+        })
+        new Vue({
+            el:"#gender",
+            data(){
+                return {
+                    isMale:0
+                }
+            },
+            watch: {
+                isMale(val) {
+                    if (!val || isNaN(val))
+                        this.isMale = 2
+                    if (val > 2) this.isMale = 2
+                    else if (val < 0) this.isMale = 0
                 }
             },
         })

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,37 +8,131 @@
     <title>lesson4-计算属性-监听器-过滤器的使用</title>
     <!-- 1、引入vue.js文件 -->
     <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
-    <!-- 14、引入axios.js文件 -->
+    <!-- 2、引入axios.js文件 -->
     <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.js"></script>
+    <!-- 17-2、引入全局过滤器 fix3 -->
+    <script src="filter.js"></script>
+    <link rel="stylesheet" href="https://www.bootcss.com/p/buttons/css/buttons.css">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/balloon-css/1.0.3/balloon.css" rel="stylesheet">
     <style>
-        [v-cloak]{
+        /* 4、[v-cloak]表示所有带v-cloak属性的标签 */
+        [v-cloak] {
             display: none;
+        }
+
+        h2 {
+            color: yellowgreen;
+        }
+
+        h4 {
+            color: rgb(30, 30, 30);
+        }
+
+        * {
+            margin: 5px;
+            padding: 5px;
         }
     </style>
 </head>
+
 <body>
+    <h3>本课目标——设计货币转换器</h3>
+    <h5 class="alert alert-success" role="alert">功能点：1、精确到小数点后两位；</h5>
+    <h5 class="alert alert-success" role="alert">功能点：2、限制输入框内容的值范围和值类型；</h5>
+    <h5 class="alert alert-success" role="alert">功能点：3、过滤器的3种使用方法：(1)、局部过滤器；(2)、全局过滤器；(3)、外部引用过滤器；</h5>
+    <h6 class="alert alert-info" role="alert">
+        v-cloak、.number、.trim、toFixed()、computed()、filters、watch()、@click、bootstrap的button样式</h6>
+    <!-- 3、v-cloak:这个指令保持在元素上直到关联实例结束编译。和 CSS 规则如 [v-cloak] { display: none } 一起用时，
+            这个指令可以隐藏未编译的 Mustache(大概模板的意思) 标签直到实例准备完毕。
+            更优方案是使用“骨架屏” -->
     <div id="app" v-cloak>
-        <input type="text" v-model.number.trim="money">
-        {{money}}
+        <!-- 5、如果想自动将用户的输入值转为数值类型，可以给 v-model 添加 number 修饰符；
+             6、如果要自动过滤用户输入的首尾空白字符，可以给 v-model 添加 trim 修饰符；
+             7、可以连用； -->
+        <button class="button button-circle button-raised button-primary" @click="--money"
+            :disabled="money===0">-</button>
+        <input type="text" v-model.number.trim="money" class="well">
+        <button class="button button-circle button-raised button-primary" @click="++money"
+            :disabled="money===10">+</button>
+        <hr>
+        <!-- 8、低端写法，在模板中进行计算不合适，在模板中放入太多的逻辑会让模板过重且难以维护 -->
+        <h2>一、低端写法(money*15.7032).toFixed(2)</h2>
+        <!-- 11、.toFixed(),四舍五入到几位，()里面传几位的参数 -->
+        <h3>人民币CNY：{{(money).toFixed(2)}}</h3>
+        <hr>
+        <h3>日元JPY：{{(money*15.7032).toFixed(2)}}</h3>
+        <hr>
+        <h3>美元USD：{{(money*0.1455).toFixed(2)}}</h3>
+        <!-- 10、高端写法， -->
+        <h2>二、高端写法{CNY | fix1}+filters</h2>
+        <!-- 12、filters过滤器加持：你可以在一个组件的选项中定义本地(局部)的过滤器；或者在创建 Vue 实例之前全局定义过滤器： -->
+        <h3 class="button button-glow button-rounded button-highlight" aria-label="这里用的是本地(局部)过滤器：fix1"
+            data-balloon-pos="up-left">人民币CNY：{{money | fix1 }}</h3>
+        <hr>
+        <h3 class="button button-glow button-rounded button-caution" aria-label="这里用的是全局过滤器：fix2"
+            data-balloon-pos="up-left">日元JPY：{{JPY | fix2}}</h3>
+        <hr>
+        <h3 class="button button-glow button-rounded button-royal" aria-label="这里用的是外部引入全局过滤器：fix3"
+            data-balloon-pos="up-left">美元USD：{{USD | fix3}}</h3>
+    </div>
+    <hr>
+    <div id="gender">
+        <button @click="--gender" class="button button-raised button-action button-circle button-jumbo"><<<</button> 
+        <input type="text" v-model.number.trim="gender" class="button button-glow button-border button-rounded button-primary">
+        <button @click="++gender" class="button button-raised button-action button-circle button-jumbo">>>></button>
+        <h6>{{gender | fmtGender}}</h6>
     </div>
 
     <script>
         // 隐藏Vue开发环境提示
-        Vue.config.productionTip = false;
-        new Vue ({
-            el:"#app",
+        Vue.config.productionTip = false
+        // 16、全局过滤器
+        // 17-1、也可以单独写一个js文件，再引用进来
+        Vue.filter("fix2", (val) => {
+            if (!val || isNaN(val)) return 0
+            return val.toFixed(2)
+        })
+        new Vue({
+            el: "#app",
+            // 9、所以我们使用Vue API中的计算属性 computed
+            computed: {
+                JPY() {
+                    return this.money * 15.7032
+                },
+                USD() {
+                    return this.money * 0.1455
+                }
+            },
+            /** 14、虽然计算属性在大多数情况下更合适，但有时也需要一个自定义的侦听器。
+            *       这就是为什么 Vue 通过 watch 选项提供了一个更通用的方法，来响应数据的变化。
+            *       当需要在数据变化时执行异步或开销较大的操作时，这个方式是最有用的。
+            */
+            watch: {
+                money(val) {
+                    if (!val || isNaN(val))
+                        this.money = 0
+                    // console.log(val)
+                    if (val > 10) this.money = 10
+                    else if (val < 0) this.money = 0
+                }
+            },
+            // 15、局部过滤器
+            filters: {
+                // 13、val从哪里来？val是money的值
+                fix1(val) {
+                    if (!val || isNaN(val)) return 0;
+                    return val.toFixed(2)
+                }
+            },
             data() {
                 return {
                     money: 1,
+                    gender: 0
                 }
-            },
-            created() {
-                
-            },
-            mounted() {
-                // dom准备好了
             },
         })
     </script>
 </body>
+
 </html>

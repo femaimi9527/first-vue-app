@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    <h1>本课目标——Vue结合axios获取远程json数据并简单展示在页面，设计删除按钮</h1>
     <!-- 10、innerHTML div标签里面的内容，outterHTML 包括div标签 -->
     <div id="app">
         <br><br>
@@ -50,28 +51,28 @@
             // 4、创建vue实例前的钩子函数
             beforeCreate() {
                 // vue规范所提供的属性名字：“$data”实例属性，Vue实例对data对象属性的访问
-                console.log("beforeCreate", this.$data,this.$el)
+                console.log("beforeCreate", this.$data, this.$el)
             },
             // 5、
             created() {
-                console.log("created", this.$data,this.$el)
+                console.log("created", this.$data, this.$el)
                 // data准备好了
                 this.getData()
             },
             // 11、beforeMount
-            beforeMount(){
+            beforeMount() {
                 // 12、渲染之前的代码
-                console.log("beforeMount",this.$data,this.$el.innerHTML)
+                console.log("beforeMount", this.$data, this.$el.innerHTML)
             },
             mounted() {
                 // dom准备好了
                 // 13、把编译之后的代码打印出来了
-                console.log("mounted",this.$data,this.$el.innerHTML)
+                console.log("mounted", this.$data, this.$el.innerHTML)
             },
-            beforeUpdate(){
+            beforeUpdate() {
                 console.log("beforeUpdate")
             },
-            updated(){
+            updated() {
                 console.log("updated")
             },
             methods: {

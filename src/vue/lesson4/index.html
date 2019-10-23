@@ -50,14 +50,14 @@
 </head>
 
 <body>
-    <h1>本课目标——用Vue设计简单轮播图</h1>
+    <h1 class="p-3 mb-2 bg-light text-dark">本课目标——用Vue设计简单轮播图</h1>
     <h5 class="alert alert-success" role="alert">功能点：1、；</h5>
     <h5 class="alert alert-success" role="alert">功能点：2、；</h5>
     <h5 class="alert alert-success" role="alert">功能点：3、：(1)、；(2)、；(3)、；</h5>
-    <h6 class="alert alert-info" role="alert"></h6>
+    <h6 class="alert alert-info" role="alert">mounted()、setInterval()、v-show、v-for、</h6>
     <div id="app">
         <div class="container">
-            <a v-for="item in arr" :key="item.id" :href="item.url">
+            <a v-show="i===index" v-for="item in arr" :key="item.id" :href="item.url">
                 <img :src="item.img" alt="">
             </a>
             <ul class="indexes">
@@ -71,7 +71,6 @@
     </div>
 
     <script>
-        Vue.config.productionTip = false;
         new Vue({
             el: "#app",
             // mounted() {

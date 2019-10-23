@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>lesson1-vue的生命周期</title>
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>lesson1-vue的生命周期</title>
+        <!-- 1、引入vue.js文件 -->
+        <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+        <!-- 2、引入axios.js文件 -->
+        <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.js"></script>
     <style>
         * {
             list-style-type: none;
@@ -14,7 +18,7 @@
 </head>
 
 <body>
-    <h1>本课目标——Vue结合axios获取远程json数据并简单展示在页面，设计删除按钮</h1>
+    <h1 class="p-3 mb-2 bg-light text-dark">本课目标——Vue结合axios获取远程json数据并简单展示在页面，设计删除按钮</h1>
     <!-- 10、innerHTML div标签里面的内容，outterHTML 包括div标签 -->
     <div id="app">
         <br><br>
@@ -28,10 +32,6 @@
             </li>
         </ul>
     </div>
-    <!-- 1、引入vue.js文件 -->
-    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
-    <!-- 2、引入axios.js文件 -->
-    <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.js"></script>
 
     <script>
         Vue.config.productionTip = false

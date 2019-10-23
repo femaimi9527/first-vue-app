@@ -37,7 +37,7 @@
 </head>
 
 <body>
-    <h3>本课目标——设计货币转换器</h3>
+    <h3 class="p-3 mb-2 bg-light text-dark">本课目标——设计货币转换器</h3>
     <h5 class="alert alert-success" role="alert">功能点：1、精确到小数点后两位；</h5>
     <h5 class="alert alert-success" role="alert">功能点：2、限制输入框内容的值范围和值类型；</h5>
     <h5 class="alert alert-success" role="alert">功能点：3、过滤器的3种使用方法：(1)、局部过滤器；(2)、全局过滤器；(3)、外部引用过滤器；</h5>
@@ -78,10 +78,13 @@
     </div>
     <hr>
     <div id="gender">
-        <button @click="--isMale" :disabled="isMale===0" class="button button-raised button-action button-circle button-jumbo"><<</button> 
-        <input type="text" v-model.number.trim="isMale" class="button button-glow button-border button-rounded button-primary">
-        <button @click="++isMale" :disabled="isMale===2" class="button button-raised button-action button-circle button-jumbo">>></button>
-        <h5 class="button button-glow">{{isMale | fmtGender}}</h5>
+        <button @click="--isMale" :disabled="isMale===0"
+            class="button button-raised button-action button-circle button-jumbo">
+            <<</button> <input type="text" v-model.number.trim="isMale"
+                class="button button-glow button-border button-rounded button-primary">
+                <button @click="++isMale" :disabled="isMale===2"
+                    class="button button-raised button-action button-circle button-jumbo">>></button>
+                <h5 class="button button-glow">{{isMale | fmtGender}}</h5>
     </div>
 
     <script>
@@ -127,21 +130,24 @@
             },
             data() {
                 return {
-                    money: 1                  
+                    money: 1
                 }
             },
         })
         new Vue({
-            el:"#gender",
-            data(){
+            el: "#gender",
+            data() {
                 return {
-                    isMale:0
+                    isMale: 0
                 }
             },
             watch: {
                 isMale(val) {
+                    // "||"表示“或”，一true则true，！求反， 
+                    // 需要注意的是，isNaN() 函数其实并不能像它的描述中所写的那样，数字值返回 false，其他返回 true。
+                    // 实际上，它是判断一个值能否被 Number() 合法地转化成数字。
                     if (!val || isNaN(val))
-                        this.isMale = 2
+                        this.isMale = 0
                     if (val > 2) this.isMale = 2
                     else if (val < 0) this.isMale = 0
                 }
